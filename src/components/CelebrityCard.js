@@ -84,54 +84,54 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
         </p>
       </div>
       {isOpen && (
-        <div className="flex justify-between my-4">
+        <div className="flex justify-start my-4 [&>div]:w-2/3">
           <div>
-            <p>Age</p>
+            <p className="mb-1 ml-1">Age</p>
             {isEdit ? (
-              <>
+              <div className="border w-24 rounded-lg">
                 <input
                   ref={age}
                   type="number"
                   value={celebAge}
                   onChange={(e) => setCelebAge(e.target.value)}
-                  className="px-1 py-1 outline-none border w-8"
+                  className="px-1 py-1 ml-1 outline-none w-8"
                 />
                 <span className="px-1">Years</span>
-              </>
+              </div>
             ) : (
-              <p>{celebAge} Years</p>
+              <p className="py-1 ml-1">{celebAge} Years</p>
             )}
           </div>
           <div>
-            <p>Gender</p>
+            <p className="mb-1">Gender</p>
             {isEdit ? (
               <select
                 ref={gender}
                 value={celebGender}
                 onChange={(e) => setCelebGender(e.target.value)}
               >
-                <option>Male</option>
-                <option>Female</option>
-                <option>Transgender</option>
-                <option>Rather not say</option>
-                <option>Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Transgender">Transgender</option>
+                <option value="Rather not say">Rather not say</option>
+                <option value="Other">Other</option>
               </select>
             ) : (
               <p className="capitalize">{celebGender}</p>
             )}
           </div>
           <div>
-            <p>Country</p>
+            <p className="mb-1">Country</p>
             {isEdit ? (
               <input
                 ref={country}
                 type="text"
                 value={celebCountry}
                 onChange={(e) => setCelebCountry(e.target.value)}
-                className="px-2 py-1 rounded-lg outline-none border"
+                className="px-2 py-1 -ml-1 rounded-lg outline-none border"
               />
             ) : (
-              <p>{celebCountry}</p>
+              <p className="py-1">{celebCountry}</p>
             )}
           </div>
         </div>
@@ -143,6 +143,7 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
             <textarea
               value={celebDescription}
               onChange={(e) => setCelebDescription(e.target.value)}
+              className="w-full resize-none min-h-24 p-1 rounded-lg outline-none border"
             ></textarea>
           ) : (
             <p>{celebDescription}</p>
