@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/custom-accordion/static/css/main.6b1958a2.css",
+    "main.js": "/custom-accordion/static/js/main.1dab0719.js",
+    "static/media/logo.svg": "/custom-accordion/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/trash-solid.svg": "/custom-accordion/static/media/trash-solid.7dda9ad72bece51d4282c1f021b5fcfe.svg",
+    "static/media/discard-cross.svg": "/custom-accordion/static/media/discard-cross.e13b9d4e29acdc4c9e5994dcbc0e074d.svg",
+    "static/media/grey-cross.svg": "/custom-accordion/static/media/grey-cross.5aeda3eb318885e3d61808b98044f125.svg",
+    "index.html": "/custom-accordion/index.html",
+    "static/media/pencil-solid.svg": "/custom-accordion/static/media/pencil-solid.1c6bc0cdde41061b1b8e4d9e072689b0.svg",
+    "static/media/save-tick.svg": "/custom-accordion/static/media/save-tick.a97fafeee54509d21814d3cbefb7147d.svg",
+    "main.6b1958a2.css.map": "/custom-accordion/static/css/main.6b1958a2.css.map",
+    "main.1dab0719.js.map": "/custom-accordion/static/js/main.1dab0719.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b1958a2.css",
+    "static/js/main.1dab0719.js"
+  ]
+}
