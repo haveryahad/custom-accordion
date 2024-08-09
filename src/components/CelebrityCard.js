@@ -1,7 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import pencil from "../assets/pencil-solid.svg";
 import trash from "../assets/trash-solid.svg";
-const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
+import discard from "../assets/discard-cross.svg";
+import save from "../assets/save-tick.svg";
+
+const CelebrityCard = ({
+  isOpen,
+  setIsOpen,
+  celeb,
+  isEditing,
+  setIsEditing,
+  setIsVisible,
+  setIsDeleteConfirmed,
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [celebName, setCelebName] = useState(`${celeb.first} ${celeb.last}`);
   const [celebGender, setCelebGender] = useState(celeb.gender);
@@ -14,16 +25,20 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
   const gender = useRef();
 
   const toggleView = () => {
-    setIsOpen(!isOpen);
+    if (!isEditing) {
+      setIsOpen(!isOpen);
+    }
   };
   const toggleEdit = () => {
-    setIsEdit(!isEdit);
+    setIsEdit(true);
+    setIsEditing(true);
   };
   const discardEdit = () => {
     setCelebName(`${celeb.first} ${celeb.last}`);
     setCelebGender(celeb.gender);
     setCelebCountry(celeb.country);
     setIsEdit(false);
+    setIsEditing(false);
   };
 
   const calculateAgeByDob = (dob) => {
@@ -45,8 +60,13 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
     setCelebGender(gender.current.value);
     setCelebCountry(country.current.value);
     setIsEdit(false);
+    setIsEditing(false);
   };
 
+  const showDeleteConfirmationDialog = () => {
+    setIsVisible(true);
+    setIsDeleteConfirmed({ delete: false, id: celeb.id });
+  };
   useEffect(() => {
     setCelebAge(calculateAgeByDob(celeb.dob));
   }, []);
@@ -84,7 +104,7 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
         </p>
       </div>
       {isOpen && (
-        <div className="flex justify-start my-4 [&>div]:w-2/3">
+        <div className="flex justify-start items-center my-4 [&>div]:w-2/3">
           <div>
             <p className="mb-1 ml-1">Age</p>
             {isEdit ? (
@@ -103,12 +123,13 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
             )}
           </div>
           <div>
-            <p className="mb-1">Gender</p>
+            <p className="mb-1 -mt-2 align-top">Gender</p>
             {isEdit ? (
               <select
                 ref={gender}
                 value={celebGender}
                 onChange={(e) => setCelebGender(e.target.value)}
+                className="w-fit mr-2"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -127,8 +148,13 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
                 ref={country}
                 type="text"
                 value={celebCountry}
-                onChange={(e) => setCelebCountry(e.target.value)}
-                className="px-2 py-1 -ml-1 rounded-lg outline-none border"
+                onChange={(e) => {
+                  setCelebCountry(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key >= 0 && e.key <= 9) e.preventDefault();
+                }}
+                className="px-2 py-1 -ml-1 rounded-lg outline-none border w-full"
               />
             ) : (
               <p className="py-1">{celebCountry}</p>
@@ -151,32 +177,37 @@ const CelebrityCard = ({ isOpen, setIsOpen, celeb }) => {
         </div>
       )}
       {isOpen && celebAge >= 18 && (
-        <div className="flex justify-end my-4">
+        <div className="flex justify-end my-4 items-center">
           {isEdit ? (
             <>
               <img
-                src="test"
+                src={discard}
                 alt="cancel"
+                className="w-12 h-12 mx-1 px-1"
                 onClick={discardEdit}
               />
               <img
-                src="test"
+                src={save}
                 alt="save"
+                className="w-12 h-12 mx-1 px-1"
                 onClick={saveUserDetails}
               />
             </>
           ) : (
             <>
               <img
+                src={trash}
+                alt="del"
+                onClick={showDeleteConfirmationDialog}
+                className="w-8 mx-3 mt-2 px-1"
+                title="Delete User"
+              />
+              <img
                 src={pencil}
                 alt="edit"
                 onClick={toggleEdit}
-                className="w-6 mx-1 px-1"
-              />
-              <img
-                src={trash}
-                alt="del"
-                className="w-6 mx-1 px-1"
+                className="w-7 mx-3 mt-2 px-1"
+                title="Edit User Details"
               />
             </>
           )}

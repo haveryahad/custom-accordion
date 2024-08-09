@@ -9,14 +9,6 @@ const Header = () => {
           className="w-32 h-32 transition-all duration-1000 hover:rotate-180"
         />
       </div>
-      <nav className="flex">
-        <div className="px-6 py-2 cursor-pointer transition-all duration-200 border-b-2 border-transparent hover:border-blue-400">
-          Home
-        </div>
-        <div className="px-6 py-2 cursor-pointer transition-all duration-200 border-b-2 border-transparent hover:border-blue-400">
-          About
-        </div>
-      </nav>
     </header>
   );
 };
